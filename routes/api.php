@@ -147,3 +147,69 @@ Route::post('/register', function () {
     // $user = User::find(3)->role;
     return $user;
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/admin/users', [App\Http\Controllers\UserController::class, 'showAllCustomers'])->name('index');
+
+Route::post('/admin/blockuser/{id}', [App\Http\Controllers\UserController::class, 'blockUser'])->name('user.block');
+
+Route::post('/admin/unblockuser/{id}', [App\Http\Controllers\UserController::class, 'unBlockUser'])->name('user.unblock');
+
+
+
+/* Route::get('/createRequest', [App\Http\Controllers\RequestController::class, 'createRequest'])->name('request.create');
+ */
+
+
+Route::post('/sendRequest', [App\Http\Controllers\RequestController::class, 'sendRequest'])->name('request.send');
+
+Route::get('admin/showAllNotification', [App\Http\Controllers\RequestController::class, 'showAllNotification'])->name('notifications.show');
+
+Route::get('admin/showNotification/{id}', [App\Http\Controllers\RequestController::class, 'showNotification'])->name('notification.show');
+
+Route::post('admin/markAsRead', [App\Http\Controllers\RequestController::class, 'markAsRead'])->name('request.markAsRead');
+
+
+
+Route::get('/messages/center', [App\Http\Controllers\MessageController::class, 'messagesCenter'])->name('messages');
+
+Route::post('/messages/center/send', [App\Http\Controllers\MessageController::class, 'sendMessageByuser'])->name('messages.send');
+
+Route::get('/admin/messages/center', [App\Http\Controllers\MessageController::class, 'adminMessagesCenter'])->name('messages.admin');
+
+Route::get('/admin/messages/center/{userId}', [App\Http\Controllers\MessageController::class, 'showConversation'])->name('messages.conversation');
+
+Route::post('/admin/messages/center/{userId}', [App\Http\Controllers\MessageController::class, 'sendReply'])->name('messages.reply');
+
+Route::delete('/messages/center/delete/{msgID}', [App\Http\Controllers\MessageController::class, 'deleteMessage'])->name('messages.admin.delete');
+
+Route::delete('/messages/center/delete/{msgID}', [App\Http\Controllers\MessageController::class, 'deleteMessage'])->name('messages.delete');
+
+/* Route::get('/messages/center/update/{msgID}', [App\Http\Controllers\MessageController::class, 'editMessage'])->name('messages.update');
+ */
+
+Route::post('/messages/center/update/send/{msgID}', [App\Http\Controllers\MessageController::class, 'editMessageSend'])->name('messages.update.send');
+
+
+Route::post('admin/messages/center/sendPhoto/{id}', [App\Http\Controllers\MessageController::class, 'sendPhotoByAdmin'])->name('admin.messages.center.send.Photo');
+
+Route::post('/messages/center/sendPhoto/', [App\Http\Controllers\MessageController::class, 'sendPhotoByUser'])->name('messages.center.send.Photo');
+
+Route::post('admin/messages/center/sendVoice/{id}', [App\Http\Controllers\MessageController::class, 'sendVoiceByAdmin'])->name('admin.messages.center.send.voice');
+
+Route::post('/messages/center/sendVoice/', [App\Http\Controllers\MessageController::class, 'sendVoiceByUser'])->name('messages.center.send.voice');
